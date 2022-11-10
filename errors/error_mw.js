@@ -37,10 +37,6 @@ module.exports ={
         data.property_name = err.propertyName;
         data.property_value = err.propertyValue;
     }
-
-    if ('object' == typeof err.additionalData) {
-        Object.keys(err.additionalData).forEach(k => data[k] = err.additionalData[k])//TODO
-    }
     res.status(err.status || MyError.STATUS_CODES.InternalServerError).json({error: data});
 },
 
