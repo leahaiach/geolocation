@@ -17,6 +17,9 @@ GET http://localhost:8080/distance?source=jerusalem&destination=telaviv
 GET http://localhost:8080/distance
 
 ###
+GET http://localhost:8080/distance?source=dubai&destination=haifa
+
+###
 GET http://localhost:8080/health
 
 ###

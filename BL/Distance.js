@@ -29,12 +29,13 @@ class Distance{
         try{
             let {source, destination} =req.distance;
             session.startTransaction();
-            let result = await DistanceModelMongo.findOne({source, destination});
+            let result = await DistanceModelMongo.findOne({source, destination},'distance');
 
             if(result){
                 result.hits = result.hits ? result.hits + 1 : 1;
                 req.resultDistance = result.distance;
                 await result.save();
+                next(req.result);
             }
             else {
                 let [s , d ] = await Promise.all([AddressesModelMongo.findOne({address: source}).select('coordinate'),
