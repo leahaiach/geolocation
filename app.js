@@ -1,16 +1,29 @@
-const app = require('express')();
-const dotenv = require('dotenv');
-dotenv.config();
-const PORT = process.env.PORT ;
-const HOST = process.env.HOST ;
+const express = require('express');
+const morgan = require('morgan');  // Logging middleware
+
+const { errorRespond, LogError} = require('./errors/error_mw');
 const healthCheck = require('./routes/healthCheck');
+const mongoHealthCheck = require('./routes/mongoHealthCheck');
+const distance = require('./routes/distance');
+const popularSearch = require('./routes/search');
 
 
+express.json();
+express.urlencoded();
+const app = express();
 
+app.use(morgan())
 
+//API middlewares
+app.use(distance.PATH, distance.router);
 app.use(healthCheck.PATH, healthCheck.router);
+app.use(mongoHealthCheck.PATH, mongoHealthCheck.router);
+app.use(popularSearch.PATH, popularSearch.router);
 
 
-app.listen(PORT , () => {
-    console.log(`Geolocation server listening on port ${PORT}`);
-})
+//Error middlewares
+app.use('*',LogError);
+app.use('*',errorRespond);
+
+
+module.exports = app;

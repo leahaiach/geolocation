@@ -1,1 +1,34 @@
-GET http://geolocation:8080/hello
+GET http://localhost:8080/hello
+
+###
+GET http://localhost:8080/distance?source=toronto&destination=mexico
+##
+
+###
+GET http://localhost:8080/distance?source=jerusalem&destination=los angeles
+###
+GET http://localhost:8080/distance?source=jerusalem&destination=paris
+###
+GET http://localhost:8080/distance?source=jerusalem&destination=china
+###
+GET http://localhost:8080/distance?source=jerusalem&destination=telaviv
+
+###
+GET http://localhost:8080/distance
+
+###
+GET http://localhost:8080/health
+
+###
+GET http://localhost:8080/popularsearch
+
+###
+POST http://localhost:8080/distance?source=jerusalem&destination=telaviv&distance=10.6
+
+###
+POST http://localhost:8080/distance?source=telaviv&destination=jerusalem&distance=1096
+
+
+
+###
+POST http://localhost:8080/distance?source=jerusalem&destination=london&distance=10
