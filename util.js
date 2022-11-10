@@ -1,6 +1,7 @@
 const axios = require("axios");
 const {InvalidArgumentError} = require('./errors/costum_error');
 module.exports = {
+
     getDistanceBetween2Points: (point1, point2)=>{
         const { getDistance } = require('geolib');
         const distance = getDistance(
@@ -8,6 +9,7 @@ module.exports = {
         )
         return distance / 1000;
     },
+    //Given text address return coordinate
     getCoordinate: async (adress)=>{
         try{
             let result = await axios.request({
