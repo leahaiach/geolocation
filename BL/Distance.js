@@ -35,7 +35,6 @@ class Distance{
                 result.hits = result.hits ? result.hits + 1 : 1;
                 req.resultDistance = result.distance;
                 await result.save();
-                next(req.result);
             }
             else {
                 let [s , d ] = await Promise.all([AddressesModelMongo.findOne({address: source}).select('coordinate'),
