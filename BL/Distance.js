@@ -78,9 +78,13 @@ class Distance{
         try{
             let myObj = Distance.validate(req, true);
             let {destination, source, distance} = myObj;
-            let newDoc = await DistanceModelMongo.findOneAndUpdate({destination, source},{distance}, {new: true, upsert: true }); //atomic operation
-            console.log("doc is "+ JSON.stringify(newDoc))
-            res.status(201).end();
+            let doc = await DistanceModelMongo.findOneAndUpdate({destination, source},{distance}, {new: true, upsert: true }); //atomic operation
+            console.log("doc is "+ JSON.stringify(doc))
+            if(doc) {
+                let hits = doc.toJSON().hits;
+                res.status(201).json({source, destination, hits });
+            }
+
             //update mongo
 
         }
